@@ -13,28 +13,61 @@
         </e>
       </e>
       <e p="Controllers" t="Include">
-        <e p="DummyController.cs" t="Include" />
         <e p="V1" t="Include">
-          <e p="AuthorizationController.cs" t="Include" />
-          <e p="Requests" t="Include">
-            <e p="CreateTestRequest.cs" t="Include" />
+          <e p="LoginController.cs" t="Include" />
+          <e p="ProtectedController.cs" t="Include" />
+          <e p="Resources" t="Include">
+            <e p="AccessTokenResource.cs" t="Include" />
+            <e p="RefreshTokenResource.cs" t="Include" />
+            <e p="RevokeTokenResource.cs" t="Include" />
+            <e p="UserCredentialsResource.cs" t="Include" />
+            <e p="UserResource.cs" t="Include" />
           </e>
           <e p="Responses" t="Include">
             <e p="TestResponse.cs" t="Include" />
           </e>
-          <e p="TestController.cs" t="Include" />
+          <e p="UsersController.cs" t="Include" />
         </e>
       </e>
       <e p="Data" t="Include">
-        <e p="DataContext.cs" t="Include" />
-        <e p="Migrations" t="Include">
-          <e p="00000000000000_CreateIdentitySchema.cs" t="Include" />
-          <e p="00000000000000_CreateIdentitySchema.Designer.cs" t="Include" />
-          <e p="ApplicationDbContextModelSnapshot.cs" t="Include" />
-        </e>
+        <e p="AppDbContext.cs" t="Include" />
+        <e p="Migrations" t="Include" />
+        <e p="UnitOfWork.cs" t="Include" />
+        <e p="UserRepository.cs" t="Include" />
       </e>
       <e p="Domain" t="Include">
-        <e p="Test.cs" t="Include" />
+        <e p="Models" t="Include">
+          <e p="User" t="Include">
+            <e p="ERole.cs" t="Include" />
+            <e p="Role.cs" t="Include" />
+            <e p="User.cs" t="Include" />
+            <e p="UserRole.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Repositories" t="Include">
+          <e p="IUnitOfWork.cs" t="Include" />
+          <e p="IUserRepository.cs" t="Include" />
+        </e>
+        <e p="Security" t="Include">
+          <e p="Hashing" t="Include">
+            <e p="IPasswordHasher.cs" t="Include" />
+          </e>
+          <e p="Tokens" t="Include">
+            <e p="AccessToken.cs" t="Include" />
+            <e p="ITokenHandler.cs" t="Include" />
+            <e p="JsonWebToken.cs" t="Include" />
+            <e p="RefreshToken.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Services" t="Include">
+          <e p="Communication" t="Include">
+            <e p="BaseResponse.cs" t="Include" />
+            <e p="CreateUserResponse.cs" t="Include" />
+            <e p="TokenResponse.cs" t="Include" />
+          </e>
+          <e p="ILoginService.cs" t="Include" />
+          <e p="IUserService.cs" t="Include" />
+        </e>
       </e>
       <e p="EDzController.csproj" t="IncludeRecursive" />
       <e p="EDzController.sln" t="IncludeFlat" />
@@ -43,6 +76,12 @@
         <e p="IInstaller.cs" t="Include" />
         <e p="InstallerExtensions.cs" t="Include" />
         <e p="MvcInstaller.cs" t="Include" />
+        <e p="SwaggerInstaller.cs" t="Include" />
+        <e p="UserLoginInstaller.cs" t="Include" />
+      </e>
+      <e p="Mapping" t="Include">
+        <e p="ModelToResourceProfile.cs" t="Include" />
+        <e p="ResourceToModelProfile.cs" t="Include" />
       </e>
       <e p="obj" t="ExcludeRecursive">
         <e p="Debug" t="Include">
@@ -51,13 +90,28 @@
           </e>
         </e>
       </e>
-      <e p="Options" t="Include">
-        <e p="SwaggerOptions.cs" t="Include" />
-      </e>
       <e p="packages" t="ExcludeRecursive" />
       <e p="Program.cs" t="Include" />
       <e p="Properties" t="Include">
         <e p="launchSettings.json" t="Include" />
+      </e>
+      <e p="Resources" t="Include">
+        <e p="StringResources.Designer.cs" t="Include" />
+        <e p="StringResources.resx" t="Include" />
+      </e>
+      <e p="Security" t="Include">
+        <e p="Hashing" t="Include">
+          <e p="PasswordHasher.cs" t="Include" />
+        </e>
+        <e p="Tokens" t="Include">
+          <e p="SigningConfigurations.cs" t="Include" />
+          <e p="TokenHandler.cs" t="Include" />
+          <e p="TokenOptions.cs" t="Include" />
+        </e>
+      </e>
+      <e p="Services" t="Include">
+        <e p="LoginService.cs" t="Include" />
+        <e p="UserService.cs" t="Include" />
       </e>
       <e p="Startup.cs" t="Include" />
     </e>

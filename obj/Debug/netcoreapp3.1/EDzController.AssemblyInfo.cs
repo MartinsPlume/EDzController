@@ -10,7 +10,6 @@
 using System;
 using System.Reflection;
 
-[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap4")]
 [assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("aspnet-EDzController-5B574711-D370-4200-85C3-3A9148486CC6")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("EDzController")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]

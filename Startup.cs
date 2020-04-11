@@ -1,7 +1,8 @@
+using System.Resources;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using EDzController.Installers;
-using EDzController.Options;
+using EDzController.Resources;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -34,17 +35,14 @@ namespace EDzController
             {
                 app.UseHsts();
             }
-
-            // Set up Swagger
-            var swaggerOptions = new SwaggerOptions();
-            Configuration.GetSection(nameof(SwaggerOptions)).Bind(swaggerOptions);
-
-            app.UseSwagger(option => { option.RouteTemplate = swaggerOptions.JsonRoute; });
-            app.UseSwaggerUI(option =>
+            
+            // Swagger startup
+            app.UseSwagger().UseSwaggerUI(options =>
             {
-                option.SwaggerEndpoint(swaggerOptions.UiEndpoint, swaggerOptions.Description);
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "EDz Controller API");
+                options.DocumentTitle = "";
             });
-
+            
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
