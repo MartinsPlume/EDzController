@@ -42,12 +42,13 @@ namespace EDzController
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "EDz Controller API");
                 options.DocumentTitle = "";
             });
+
             
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
