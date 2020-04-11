@@ -9,7 +9,7 @@ namespace EDzController.Installers
     {
         public static void InstallServicesInAssemblies(this IServiceCollection services, IConfiguration configuration)
         {
-            var installers = typeof(Startup)
+            var installers = typeof(IInstaller)
                 .Assembly
                 .ExportedTypes
                 .Where(x => typeof(IInstaller)
@@ -17,7 +17,10 @@ namespace EDzController.Installers
                 .Select(Activator.CreateInstance)
                 .Cast<IInstaller>()
                 .ToList();
-            installers.ForEach(installer => installer.InstallServices(services, configuration));
+            
+            installers
+                .ForEach(installer => installer
+                    .InstallServices(services, configuration));
         }
     }
 }
