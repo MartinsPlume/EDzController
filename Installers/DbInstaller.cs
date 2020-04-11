@@ -11,7 +11,7 @@ namespace EDzController.Installers
         {
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(
-                    configuration.GetConnectionString("DefaultConnection")));
+                    configuration.GetConnectionString("DevConnection")));
         }
     }
 }
