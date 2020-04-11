@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using EDzController.Resources;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace EDzController.Installers
@@ -9,6 +10,13 @@ namespace EDzController.Installers
         {
             services.AddControllers();
             services.AddRazorPages();
+            services.AddCors(options => options.AddPolicy(StringResources.TitleShort, builder =>
+            {
+                builder.AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .WithOrigins(@"http://localhost:3000");
+            }));
+            services.AddMvc();
         }
     }
 }

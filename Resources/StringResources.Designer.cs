@@ -22,7 +22,7 @@ namespace EDzController.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class StringResources {
+    public class StringResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace EDzController.Resources {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EDzController.Resources.StringResources", typeof(StringResources).Assembly);
@@ -51,7 +51,7 @@ namespace EDzController.Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -64,7 +64,7 @@ namespace EDzController.Resources {
         ///   Looks up a localized string similar to &quot;Dzintra Educational System Controller. User login and registration, material
         ///            and link database.&quot;.
         /// </summary>
-        internal static string DescriptionLong {
+        public static string DescriptionLong {
             get {
                 return ResourceManager.GetString("DescriptionLong", resourceCulture);
             }
@@ -73,7 +73,7 @@ namespace EDzController.Resources {
         /// <summary>
         ///   Looks up a localized string similar to &quot;Dzintra Educational System Controller&quot;.
         /// </summary>
-        internal static string TitleLong {
+        public static string TitleLong {
             get {
                 return ResourceManager.GetString("TitleLong", resourceCulture);
             }
@@ -82,7 +82,7 @@ namespace EDzController.Resources {
         /// <summary>
         ///   Looks up a localized string similar to &quot;EDz Controller&quot;.
         /// </summary>
-        internal static string TitleShort {
+        public static string TitleShort {
             get {
                 return ResourceManager.GetString("TitleShort", resourceCulture);
             }

@@ -1,4 +1,3 @@
-using System.Resources;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using EDzController.Installers;
@@ -49,6 +48,7 @@ namespace EDzController
 
             app.UseRouting();
             app.UseAuthorization();
+            app.UseCors(StringResources.TitleShort);
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

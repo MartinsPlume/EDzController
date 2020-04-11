@@ -1,8 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Reflection;
-using System.Resources;
-using EDzController.Resources;
+﻿using EDzController.Resources;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
@@ -11,7 +7,6 @@ namespace EDzController.Installers
 {
     public class SwaggerInstaller : IInstaller
     {
-        private readonly ResourceManager _resourceManager = new ResourceManager(typeof(StringResources));
 
         public void InstallServices(IServiceCollection services, IConfiguration configuration)
         {
@@ -19,9 +14,9 @@ namespace EDzController.Installers
             {
                 cfg.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = _resourceManager.GetString("TitleLong"),
+                    Title = StringResources.TitleLong ?? $"Title",
                     Version = "v1",
-                    Description = _resourceManager.GetString("DescriptionLong"),
+                    Description = StringResources.DescriptionLong ?? $"Description",
                     Contact = new OpenApiContact
                     {
                         Name = "Teacher",

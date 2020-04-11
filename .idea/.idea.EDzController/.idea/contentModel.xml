@@ -23,15 +23,11 @@
             <e p="UserCredentialsResource.cs" t="Include" />
             <e p="UserResource.cs" t="Include" />
           </e>
-          <e p="Responses" t="Include">
-            <e p="TestResponse.cs" t="Include" />
-          </e>
           <e p="UsersController.cs" t="Include" />
         </e>
       </e>
       <e p="Data" t="Include">
         <e p="AppDbContext.cs" t="Include" />
-        <e p="Migrations" t="Include" />
         <e p="UnitOfWork.cs" t="Include" />
         <e p="UserRepository.cs" t="Include" />
       </e>
@@ -82,6 +78,11 @@
       <e p="Mapping" t="Include">
         <e p="ModelToResourceProfile.cs" t="Include" />
         <e p="ResourceToModelProfile.cs" t="Include" />
+      </e>
+      <e p="Migrations" t="Include">
+        <e p="20200411083934_EDzDb.cs" t="Include" />
+        <e p="20200411083934_EDzDb.Designer.cs" t="Include" />
+        <e p="AppDbContextModelSnapshot.cs" t="Include" />
       </e>
       <e p="obj" t="ExcludeRecursive">
         <e p="Debug" t="Include">
