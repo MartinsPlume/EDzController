@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EDzController.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200411083934_EDzDb")]
+    [Migration("20200412162100_EDzDb")]
     partial class EDzDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

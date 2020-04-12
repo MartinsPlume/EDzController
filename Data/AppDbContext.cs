@@ -1,4 +1,5 @@
-﻿using EDzController.Domain.Models.User;
+﻿using System.Collections.Generic;
+using EDzController.Domain.Models.User;
 using Microsoft.EntityFrameworkCore;
 
 namespace EDzController.Data
@@ -14,7 +15,6 @@ namespace EDzController.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-
             builder.Entity<UserRole>().HasKey(ur => new { ur.UserId, ur.RoleId });
         }
     }

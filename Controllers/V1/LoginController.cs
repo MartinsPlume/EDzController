@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using AutoMapper;
 using EDzController.Controllers.V1.Resources;
 using EDzController.Domain.Security.Tokens;
@@ -27,6 +28,8 @@ namespace EDzController.Controllers.V1
             {
                 return BadRequest(ModelState);
             }
+
+            Console.WriteLine(userCredentials.ToString());
 
             var response = await _loginService.CreateAccessTokenAsync(userCredentials.Email, userCredentials.Password);
             if(!response.Success)
