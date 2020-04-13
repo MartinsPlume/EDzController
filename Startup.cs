@@ -47,6 +47,7 @@ namespace EDzController
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseCors(StringResources.TitleShort);
             app.UseEndpoints(endpoints =>
