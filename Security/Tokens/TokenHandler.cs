@@ -64,7 +64,7 @@ namespace EDzController.Security.Tokens
 
         private AccessToken BuildAccessToken(User user, RefreshToken refreshToken)
         {
-            var accessTokenExpiration = DateTime.UtcNow.AddSeconds(_tokenOptions.AccessTokenExpiration);
+            var accessTokenExpiration = DateTime.UtcNow.AddDays(1);
 
             var securityToken = new JwtSecurityToken
             (
