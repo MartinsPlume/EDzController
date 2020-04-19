@@ -87,7 +87,8 @@ namespace EDzController.Security.Tokens
             var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(JwtRegisteredClaimNames.Sub, user.Email)
+                new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+                new Claim($"UserRole", user.UserRoles.Select(role => role.Role.Name).FirstOrDefault())
             };
             claims
                 .AddRange(user
