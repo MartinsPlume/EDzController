@@ -8,8 +8,8 @@ namespace EDzController.Installers
     {
         public void InstallServices(IServiceCollection services, IConfiguration configuration)
         {
-            services.AddControllers();
-            services.AddRazorPages();
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddCors(options => options.AddPolicy(StringResources.TitleShort, builder =>
             {
                 builder.AllowAnyHeader()

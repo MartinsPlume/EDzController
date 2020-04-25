@@ -1,12 +1,12 @@
-﻿using System;
+﻿using EDzController.Domain.Models;
+using EDzController.Domain.Security.Hashing;
+using EDzController.Domain.Security.Tokens;
+using Microsoft.Extensions.Options;
+using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
-using EDzController.Domain.Models.User;
-using EDzController.Domain.Security.Hashing;
-using EDzController.Domain.Security.Tokens;
-using Microsoft.Extensions.Options;
 
 namespace EDzController.Security.Tokens
 {
@@ -55,8 +55,8 @@ namespace EDzController.Security.Tokens
         {
             var refreshToken = new RefreshToken
             (
-                token : _passwordHasher.HashPassword(Guid.NewGuid().ToString()),
-                expiration : DateTime.UtcNow.AddSeconds(_tokenOptions.RefreshTokenExpiration).Ticks
+                token: _passwordHasher.HashPassword(Guid.NewGuid().ToString()),
+                expiration: DateTime.UtcNow.AddSeconds(_tokenOptions.RefreshTokenExpiration).Ticks
             );
 
             return refreshToken;
@@ -68,12 +68,12 @@ namespace EDzController.Security.Tokens
 
             var securityToken = new JwtSecurityToken
             (
-                issuer : _tokenOptions.Issuer,
-                audience : _tokenOptions.Audience,
-                claims : GetClaims(user),
-                expires : accessTokenExpiration,
-                notBefore : DateTime.UtcNow,
-                signingCredentials : _signingConfigurations.SigningCredentials
+                issuer: _tokenOptions.Issuer,
+                audience: _tokenOptions.Audience,
+                claims: GetClaims(user),
+                expires: accessTokenExpiration,
+                notBefore: DateTime.UtcNow,
+                signingCredentials: _signingConfigurations.SigningCredentials
             );
 
             var handler = new JwtSecurityTokenHandler();
@@ -93,7 +93,7 @@ namespace EDzController.Security.Tokens
             claims
                 .AddRange(user
                     .UserRoles
-                    .Select(userRole => 
+                    .Select(userRole =>
                         new Claim(ClaimTypes.Role, userRole.Role.Name)));
 
             return claims;

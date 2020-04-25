@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace EDzController.Domain.Models.User
+namespace EDzController.Domain.Models
 {
     public class Role
     {

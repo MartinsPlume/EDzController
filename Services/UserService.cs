@@ -1,9 +1,10 @@
-﻿using System.Threading.Tasks;
-using EDzController.Domain.Models.User;
+﻿using EDzController.Domain.Models;
 using EDzController.Domain.Repositories;
 using EDzController.Domain.Security.Hashing;
 using EDzController.Domain.Services;
 using EDzController.Domain.Services.Communication;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace EDzController.Services
 {
@@ -23,10 +24,10 @@ namespace EDzController.Services
         public async Task<CreateUserResponse> CreateUserAsync(User user, params ERole[] userRoles)
         {
             var existingUser = await _userRepository.FindByEmailAsync(user.Email);
-            if(existingUser != null)
+            if (existingUser != null)
             {
                 return new CreateUserResponse(false, "Email already in use.", null);
-            } 
+            }
 
             user.Password = _passwordHasher.HashPassword(user.Password);
 
@@ -39,6 +40,11 @@ namespace EDzController.Services
         public async Task<User> FindByEmailAsync(string email)
         {
             return await _userRepository.FindByEmailAsync(email);
+        }
+
+        public IQueryable<object> GetAllUsers()
+        {
+            return _userRepository.GetUsers();
         }
     }
 }

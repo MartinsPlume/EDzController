@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace EDzController.Domain.Models.User
+namespace EDzController.Domain.Models
 {
     public class User
     {
@@ -13,9 +13,10 @@ namespace EDzController.Domain.Models.User
         [StringLength(255)]
         public string Email { get; set; }
 
-        [Required]
-        public string Password { get; set; }
+        [Required] public string Password { get; set; }
 
         public ICollection<UserRole> UserRoles { get; set; } = new Collection<UserRole>();
+
+        public ICollection<UserLog> UserLogs { get; set; } = new Collection<UserLog>();
     }
 }

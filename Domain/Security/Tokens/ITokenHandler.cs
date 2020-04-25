@@ -1,4 +1,4 @@
-﻿using EDzController.Domain.Models.User;
+﻿using EDzController.Domain.Models;
 
 namespace EDzController.Domain.Security.Tokens
 {

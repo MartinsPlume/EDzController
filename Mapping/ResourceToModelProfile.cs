@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using EDzController.Controllers.V1.Resources;
-using EDzController.Domain.Models.User;
+using EDzController.Domain.Models;
 
 namespace EDzController.Mapping
 {

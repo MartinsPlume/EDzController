@@ -28,15 +28,19 @@
       </e>
       <e p="Data" t="Include">
         <e p="AppDbContext.cs" t="Include" />
+        <e p="DatabaseSeed.cs" t="Include" />
         <e p="UnitOfWork.cs" t="Include" />
         <e p="UserRepository.cs" t="Include" />
       </e>
       <e p="Domain" t="Include">
         <e p="Models" t="Include">
+          <e p="Exercises" t="Include" />
           <e p="User" t="Include">
             <e p="ERole.cs" t="Include" />
+            <e p="Log.cs" t="Include" />
             <e p="Role.cs" t="Include" />
             <e p="User.cs" t="Include" />
+            <e p="UserLog.cs" t="Include" />
             <e p="UserRole.cs" t="Include" />
           </e>
         </e>
@@ -59,6 +63,7 @@
           <e p="Communication" t="Include">
             <e p="BaseResponse.cs" t="Include" />
             <e p="CreateUserResponse.cs" t="Include" />
+            <e p="GetUserResponse.cs" t="Include" />
             <e p="TokenResponse.cs" t="Include" />
           </e>
           <e p="ILoginService.cs" t="Include" />
@@ -80,8 +85,12 @@
         <e p="ResourceToModelProfile.cs" t="Include" />
       </e>
       <e p="Migrations" t="Include">
-        <e p="20200411083934_EDzDb.cs" t="Include" />
-        <e p="20200411083934_EDzDb.Designer.cs" t="Include" />
+        <e p="20200418065836_EDzDb.cs" t="Include" />
+        <e p="20200418065836_EDzDb.Designer.cs" t="Include" />
+        <e p="20200418071215_UpdateLogsColumns.cs" t="Include" />
+        <e p="20200418071215_UpdateLogsColumns.Designer.cs" t="Include" />
+        <e p="20200418073415_LogColumnNameChange.cs" t="Include" />
+        <e p="20200418073415_LogColumnNameChange.Designer.cs" t="Include" />
         <e p="AppDbContextModelSnapshot.cs" t="Include" />
       </e>
       <e p="obj" t="ExcludeRecursive">

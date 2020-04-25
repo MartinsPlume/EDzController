@@ -1,4 +1,4 @@
-﻿namespace EDzController.Domain.Models.User
+﻿namespace EDzController.Domain.Models
 {
     public enum ERole
     {

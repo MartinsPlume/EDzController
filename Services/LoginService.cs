@@ -1,8 +1,8 @@
-﻿using System.Threading.Tasks;
-using EDzController.Domain.Security.Hashing;
+﻿using EDzController.Domain.Security.Hashing;
 using EDzController.Domain.Security.Tokens;
 using EDzController.Domain.Services;
 using EDzController.Domain.Services.Communication;
+using System.Threading.Tasks;
 
 namespace EDzController.Services
 {
@@ -11,7 +11,7 @@ namespace EDzController.Services
         private readonly IUserService _userService;
         private readonly IPasswordHasher _passwordHasher;
         private readonly ITokenHandler _tokenHandler;
-        
+
         public LoginService(IUserService userService, IPasswordHasher passwordHasher, ITokenHandler tokenHandler)
         {
             _tokenHandler = tokenHandler;

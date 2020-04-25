@@ -1,12 +1,12 @@
-﻿using System.Linq;
-using AutoMapper;
+﻿using AutoMapper;
 using EDzController.Controllers.V1.Resources;
-using EDzController.Domain.Models.User;
+using EDzController.Domain.Models;
 using EDzController.Domain.Security.Tokens;
+using System.Linq;
 
 namespace EDzController.Mapping
 {
-    public class ModelToResourceProfile :Profile
+    public class ModelToResourceProfile : Profile
     {
         public ModelToResourceProfile()
         {
