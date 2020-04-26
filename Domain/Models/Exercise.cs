@@ -20,7 +20,6 @@ namespace EDzController.Domain.Models
         [Column(TypeName = "nvarchar(100)")]
         public string ShortDescription { get; set; }
 
-        [Required]
         [Column(TypeName = "ntext")]
         public string Description { get; set; }
 
