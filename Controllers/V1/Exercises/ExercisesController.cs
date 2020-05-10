@@ -14,33 +14,21 @@ namespace EDzController.Controllers.V1.Exercises
     public class ExercisesController : ControllerBase
     {
         private readonly AppDbContext _context;
-        public ExercisesController(AppDbContext context)
-        {
-            _context = context;
-        }
+        public ExercisesController(AppDbContext context) => _context = context;
 
         [HttpGet]
         [Authorize(Roles = "Teacher")]
-        public IEnumerable<Exercise> GetExercises()
-        {
-            return _context.Exercises;
-        }
+        public IEnumerable<Exercise> GetExercises() => _context.Exercises;
 
         // GET: api/Exercise/5
         [HttpGet("{id}", Name = "Get")]
         public async Task<IActionResult> GetExercise([FromRoute] int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
             var exercise = await _context.Exercises.FindAsync(id);
 
-            if (exercise == null)
-            {
-                return NotFound();
-            }
+            if (exercise == null) return NotFound();
 
             return Ok(exercise);
         }
@@ -50,10 +38,7 @@ namespace EDzController.Controllers.V1.Exercises
         [Authorize(Roles = "Teacher")]
         public async Task<IActionResult> PostProduct([FromBody] Exercise exercise)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
             _context.Exercises.Add(exercise);
             await _context.SaveChangesAsync();
@@ -66,15 +51,9 @@ namespace EDzController.Controllers.V1.Exercises
         [Authorize(Roles = "Teacher")]
         public async Task<IActionResult> PutExercise([FromRoute] int id, [FromBody] Exercise exercise)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            if (id != exercise.ExerciseId)
-            {
-                return BadRequest();
-            }
+            if (id != exercise.ExerciseId) return BadRequest();
 
             _context.Entry(exercise).State = EntityState.Modified;
 
@@ -84,10 +63,7 @@ namespace EDzController.Controllers.V1.Exercises
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ExerciseExists(id))
-                {
-                    return NotFound();
-                }
+                if (!ExerciseExists(id)) return NotFound();
 
                 throw;
             }
@@ -100,25 +76,16 @@ namespace EDzController.Controllers.V1.Exercises
         [Authorize(Roles = "Teacher")]
         public async Task<IActionResult> DeleteExercise([FromRoute] int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            var excercise = await _context.Exercises.FindAsync(id);
-            if (excercise == null)
-            {
-                return NotFound();
-            }
+            var exercise = await _context.Exercises.FindAsync(id);
+            if (exercise == null) return NotFound();
 
-            _context.Exercises.Remove(excercise);
+            _context.Exercises.Remove(exercise);
             await _context.SaveChangesAsync();
-            return Ok(excercise);
+            return Ok(exercise);
         }
 
-        private bool ExerciseExists(int id)
-        {
-            return _context.Exercises.Any(e => e.ExerciseId == id);
-        }
+        private bool ExerciseExists(int id) => _context.Exercises.Any(e => e.ExerciseId == id);
     }
 }
