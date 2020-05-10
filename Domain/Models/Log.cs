@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
 
 namespace EDzController.Domain.Models
 {
@@ -9,7 +7,7 @@ namespace EDzController.Domain.Models
     {
         public int Id { get; set; }
 
-        [Required] public DateTime? LastLoginDateTime { get; set; }
+        public string UserInfo { get; set; }
 
         public ICollection<UserLog> UsersLog { get; set; } = new Collection<UserLog>();
     }
