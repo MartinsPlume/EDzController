@@ -21,7 +21,7 @@ namespace EDzController.Controllers.V1.Exercises
 
         [HttpGet]
         [Authorize(Roles = "Teacher")]
-        public IEnumerable<Exercise> GetProducts()
+        public IEnumerable<Exercise> GetExercises()
         {
             return _context.Exercises;
         }
