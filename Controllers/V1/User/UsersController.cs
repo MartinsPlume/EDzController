@@ -39,6 +39,5 @@ namespace EDzController.Controllers.V1.User
             var userResource = _mapper.Map<Domain.Models.User, UserResource>(response.User);
             return Ok(userResource);
         }
-
     }
 }
