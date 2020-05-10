@@ -14,10 +14,6 @@ namespace EDzController.Domain.Models
 
         [Required]
         [Column(TypeName = "nvarchar(100)")]
-        public string ExerciseCode { get; set; }
-
-        [Required]
-        [Column(TypeName = "nvarchar(100)")]
         public string ShortDescription { get; set; }
 
         [Column(TypeName = "ntext")]
