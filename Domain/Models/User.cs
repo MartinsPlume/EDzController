@@ -16,7 +16,5 @@ namespace EDzController.Domain.Models
         [Required] public string Password { get; set; }
 
         public ICollection<UserRole> UserRoles { get; set; } = new Collection<UserRole>();
-
-        public ICollection<UserLog> UserLogs { get; set; } = new Collection<UserLog>();
     }
 }

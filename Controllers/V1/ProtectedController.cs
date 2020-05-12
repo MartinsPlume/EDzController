@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using EDzController.Domain.Models;
 using EDzController.Domain.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,9 +12,14 @@ namespace EDzController.Controllers.V1
     {
         private readonly IUserService _userService;
 
-        public ProtectedController(IUserService userService)
+        public ProtectedController(IUserService userService) => _userService = userService;
+
+        [HttpGet]
+        [Authorize(Roles = "Teacher")]
+        [Route("/api/v1/students")]
+        public IEnumerable<UserInfo> GetStudentList()
         {
-            _userService = userService;
+            return _userService.GetStudents();
         }
 
         [HttpGet]
@@ -22,13 +29,13 @@ namespace EDzController.Controllers.V1
         {
             return Ok("Teacher info");
         }
-
+        
         [HttpGet]
         [Authorize(Roles = "Administrator")]
         [Route("/api/v1/admin")]
-        public IQueryable<object> GetAllUsers()
+        public IActionResult GetAdminData()
         {
-            return _userService.GetAllUsers();
+            return Ok("Administrator info");
         }
     }
 }

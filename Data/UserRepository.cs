@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EDzController.Controllers.V1.Resources;
 using EDzController.Domain.Models;
 using EDzController.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -33,15 +34,17 @@ namespace EDzController.Data
                 .SingleOrDefaultAsync(u => u.Email == email);
         }
 
-        public IQueryable<object> GetUsers()
+        public IEnumerable<UserInfo> GetStudents()
         {
-            IQueryable<object> users = _context.Users
+            var users = _context.Users
                 .Select(u => new
                 {
-                    u.Id, u.Email, UserRole = u.UserRoles.Select(role => role.Role.Name).FirstOrDefault()
-                });
-
-            return users;
+                    u.Id, u.Email, UserRole = u.UserRoles.Select(role => role.Role.Id).FirstOrDefault()
+                })
+                .Where(u=>u.UserRole == 1);
+            return users.Select(u => new UserInfo {Email = u.Email, Id = u.Id});
         }
     }
+
 }
+

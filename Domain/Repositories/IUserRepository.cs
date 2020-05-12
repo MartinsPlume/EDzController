@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EDzController.Controllers.V1.Resources;
 using EDzController.Domain.Models;
 
 namespace EDzController.Domain.Repositories
@@ -10,7 +11,6 @@ namespace EDzController.Domain.Repositories
         Task AddAsync(User user, IEnumerable<ERole> userRoles);
 
         Task<User> FindByEmailAsync(string email);
-
-        public IQueryable<object> GetUsers();
+        IEnumerable<UserInfo> GetStudents();
     }
 }

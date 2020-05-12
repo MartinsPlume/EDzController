@@ -20,8 +20,7 @@ namespace EDzController.Controllers.V1.Exercises
         [Authorize(Roles = "Teacher")]
         public IEnumerable<Exercise> GetExercises() => _context.Exercises;
 
-        // GET: api/Exercise/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}", Name = "GetExercises")]
         public async Task<IActionResult> GetExercise([FromRoute] int id)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);

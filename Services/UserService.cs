@@ -1,4 +1,5 @@
-﻿using EDzController.Domain.Models;
+﻿using System.Collections.Generic;
+using EDzController.Domain.Models;
 using EDzController.Domain.Repositories;
 using EDzController.Domain.Security.Hashing;
 using EDzController.Domain.Services;
@@ -42,9 +43,9 @@ namespace EDzController.Services
             return await _userRepository.FindByEmailAsync(email);
         }
 
-        public IQueryable<object> GetAllUsers()
+        public IEnumerable<UserInfo> GetStudents()
         {
-            return _userRepository.GetUsers();
+            return _userRepository.GetStudents();
         }
     }
 }

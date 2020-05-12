@@ -23,10 +23,7 @@ namespace EDzController.Controllers.V1.User
         [HttpPost]
         public async Task<IActionResult> CreateUserAsync([FromBody] UserCredentialsResource userCredentials)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
             var user = _mapper.Map<UserCredentialsResource, Domain.Models.User>(userCredentials);
 

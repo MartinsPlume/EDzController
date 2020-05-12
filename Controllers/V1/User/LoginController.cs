@@ -28,7 +28,6 @@ namespace EDzController.Controllers.V1.User
             var response = await _loginService.CreateAccessTokenAsync(userCredentials.Email, userCredentials.Password);
             if (!response.Success) return BadRequest(response.Message);
 
-            // Creates a log of login DateTime
             var accessTokenResource = _mapper.Map<AccessToken, AccessTokenResource>(response.Token);
             return Ok(accessTokenResource);
         }
