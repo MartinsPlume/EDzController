@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace EDzController.Controllers.V1.Exercises
@@ -17,9 +18,24 @@ namespace EDzController.Controllers.V1.Exercises
         public ExercisesController(AppDbContext context) => _context = context;
 
         [HttpGet]
-        [Authorize(Roles = "Teacher")]
-        public IEnumerable<Exercise> GetExercises() => _context.Exercises;
+        [Authorize(Roles = "Teacher, Student")]
+        public IEnumerable<Exercise> GetExercises()
+        {
+            var currentUser = HttpContext.User;
+            var userRole = currentUser
+                .Claims
+                .FirstOrDefault(c => c.Type == "UserRole")?
+                .Value.ToString();
+            
+            if (userRole != null && userRole.Equals("Teacher")) return _context.Exercises;
+            
+            var userEmail = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var exercises = _context.Assignments.Where(u => u.UserEmail == userEmail).Select(u => u.ExerciseId);
+            
+            return _context.Exercises.Where(e=>exercises.Contains(e.ExerciseId));
+        }
 
+        [Authorize(Roles = "Teacher, Student")]
         [HttpGet("{id}", Name = "GetExercises")]
         public async Task<IActionResult> GetExercise([FromRoute] int id)
         {

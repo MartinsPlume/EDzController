@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using EDzController.Domain.Models;
 using EDzController.Domain.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -13,6 +16,20 @@ namespace EDzController.Controllers.V1
         private readonly IUserService _userService;
 
         public ProtectedController(IUserService userService) => _userService = userService;
+        
+        [HttpGet]
+        [Authorize(Roles = "Student, Teacher")]
+        [Route("/api/v1/test")]
+        public string Test()
+        {
+            var currentUser = HttpContext.User;
+            var userRole = currentUser
+                .Claims
+                .FirstOrDefault(c => c.Type == "UserRole")?
+                .Value
+                .ToString();
+            return userRole;
+        }
 
         [HttpGet]
         [Authorize(Roles = "Teacher")]

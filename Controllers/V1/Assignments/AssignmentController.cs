@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using EDzController.Data;
 using EDzController.Domain.Models;
@@ -11,16 +13,33 @@ namespace EDzController.Controllers.V1.Assignments
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize(Roles = "Teacher")]
-    public class TeacherAssignmentController : Controller
+    
+    public class AssignmentController : Controller
     {
         private readonly AppDbContext _context;
 
-        public TeacherAssignmentController(AppDbContext context) => _context = context;
-
-        [HttpGet]
-        public IEnumerable<Assignment> GetAssignments() => _context.Assignments;
+        public AssignmentController(AppDbContext context) => _context = context;
         
+        
+
+        [Authorize(Roles = "Student, Teacher")]
+        [HttpGet]
+        public IEnumerable<Assignment> GetAssignments()
+        {
+            var currentUser = HttpContext.User;
+            var userRole = currentUser
+                .Claims
+                .FirstOrDefault(c => c.Type == "UserRole")?
+                .Value.ToString();
+            
+            if (userRole != null && userRole.Equals("Teacher")) return _context.Assignments;
+            
+            var userEmail = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+            
+            return _context.Assignments.Where(u => u.UserEmail == userEmail);
+        }
+
+        [Authorize(Roles = "Student, Teacher")]
         [HttpGet("{id}", Name = "GetAssignments")]
         public async Task<IActionResult> GetAssignment([FromRoute] int id)
         {
@@ -33,6 +52,7 @@ namespace EDzController.Controllers.V1.Assignments
             return Ok(assignment);
         }
         
+        [Authorize(Roles = "Teacher")]
         [HttpPost]
         public async Task <IActionResult> PostAssignment([FromBody] Assignment assignment)
         {
@@ -44,6 +64,7 @@ namespace EDzController.Controllers.V1.Assignments
             return CreatedAtAction("GetAssignment", new { id = assignment.Id }, assignment);
         }
         
+        [Authorize(Roles = "Teacher")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAssignment([FromRoute] int id, [FromBody] Assignment assignment)
         {
@@ -67,6 +88,7 @@ namespace EDzController.Controllers.V1.Assignments
             return NoContent();
         }
         
+        [Authorize(Roles = "Teacher")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAssignment([FromRoute] int id)
         {
