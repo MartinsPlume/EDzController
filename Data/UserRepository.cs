@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EDzController.Controllers.V1.Resources;
 using EDzController.Domain.Models;
 using EDzController.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;

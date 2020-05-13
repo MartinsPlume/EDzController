@@ -1,5 +1,4 @@
-﻿using System;
-using EDzController.Data;
+﻿using EDzController.Data;
 using EDzController.Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -73,8 +72,6 @@ namespace EDzController.Controllers.V1.Exercises
 
             _context.Entry(exercise).State = EntityState.Modified;
 
-            var test = ExerciseExists(id);
-
             try
             {
                 await _context.SaveChangesAsync();
@@ -98,8 +95,6 @@ namespace EDzController.Controllers.V1.Exercises
 
             var exercise = await _context.Exercises.FindAsync(id);
             if (exercise == null) return NotFound();
-
-            var x = ExerciseExists(id);
 
             if (ExerciseExistsInAssignment(id))
             {
