@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EDzController.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200426100111_Updated UserExercise")]
-    partial class UpdatedUserExercise
+    [Migration("20200513185907_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,54 +21,51 @@ namespace EDzController.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("EDzController.Domain.Models.Exercise", b =>
-                {
-                    b.Property<int>("ExerciseId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("ntext");
-
-                    b.Property<string>("ExerciseCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("ExerciseName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("ExercisePicture")
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("ExerciseVideo")
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("ShortDescription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("ExerciseId");
-
-                    b.ToTable("Exercises");
-                });
-
-            modelBuilder.Entity("EDzController.Domain.Models.Log", b =>
+            modelBuilder.Entity("EDzController.Domain.Models.Assignment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime?>("LastLoginDateTime")
-                        .IsRequired()
-                        .HasColumnType("datetime2");
+                    b.Property<int?>("ExerciseId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ShortInstruction")
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Logs");
+                    b.HasIndex("ExerciseId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Assignments");
+                });
+
+            modelBuilder.Entity("EDzController.Domain.Models.Exercise", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("ntext");
+
+                    b.Property<string>("ExerciseName")
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("ShortDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Exercises");
                 });
 
             modelBuilder.Entity("EDzController.Domain.Models.Role", b =>
@@ -109,39 +106,6 @@ namespace EDzController.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("EDzController.Domain.Models.UserExercise", b =>
-                {
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ExerciseId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
-                    b.HasKey("UserId", "ExerciseId");
-
-                    b.HasIndex("ExerciseId");
-
-                    b.ToTable("UserExercises");
-                });
-
-            modelBuilder.Entity("EDzController.Domain.Models.UserLog", b =>
-                {
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LogId")
-                        .HasColumnType("int");
-
-                    b.HasKey("UserId", "LogId");
-
-                    b.HasIndex("LogId");
-
-                    b.ToTable("UserLogs");
-                });
-
             modelBuilder.Entity("EDzController.Domain.Models.UserRole", b =>
                 {
                     b.Property<int>("UserId")
@@ -157,34 +121,15 @@ namespace EDzController.Migrations
                     b.ToTable("UserRoles");
                 });
 
-            modelBuilder.Entity("EDzController.Domain.Models.UserExercise", b =>
+            modelBuilder.Entity("EDzController.Domain.Models.Assignment", b =>
                 {
                     b.HasOne("EDzController.Domain.Models.Exercise", "Exercise")
-                        .WithMany()
-                        .HasForeignKey("ExerciseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Assignments")
+                        .HasForeignKey("ExerciseId");
 
                     b.HasOne("EDzController.Domain.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("EDzController.Domain.Models.UserLog", b =>
-                {
-                    b.HasOne("EDzController.Domain.Models.Log", "Log")
-                        .WithMany("UsersLog")
-                        .HasForeignKey("LogId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EDzController.Domain.Models.User", "User")
-                        .WithMany("UserLogs")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Assignments")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("EDzController.Domain.Models.UserRole", b =>

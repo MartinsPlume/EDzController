@@ -31,9 +31,9 @@ namespace EDzController.Controllers.V1.Exercises
             if (userRole != null && userRole.Equals("Teacher")) return _context.Exercises;
             
             var userEmail = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var exercises = _context.Assignments.Where(u => u.UserEmail == userEmail).Select(u => u.ExerciseId);
+            var exercises = _context.Assignments.Where(u => u.User.Email == userEmail).Select(u => u.Exercise.Id);
             
-            return _context.Exercises.Where(e=>exercises.Contains(e.ExerciseId));
+            return _context.Exercises.Where(e=>exercises.Contains(e.Id));
         }
 
         [Authorize(Roles = "Teacher, Student")]
@@ -59,7 +59,7 @@ namespace EDzController.Controllers.V1.Exercises
             _context.Exercises.Add(exercise);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetExercise", new { id = exercise.ExerciseId }, exercise);
+            return CreatedAtAction("GetExercise", new { id = exercise.Id }, exercise);
         }
 
         // PUT: api/Exercise/5
@@ -69,7 +69,7 @@ namespace EDzController.Controllers.V1.Exercises
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            if (id != exercise.ExerciseId) return BadRequest();
+            if (id != exercise.Id) return BadRequest();
 
             _context.Entry(exercise).State = EntityState.Modified;
 
@@ -111,8 +111,8 @@ namespace EDzController.Controllers.V1.Exercises
             return Ok(exercise);
         }
 
-        private bool ExerciseExistsInAssignment(int id) => _context.Assignments.Any(a => a.ExerciseId == id);
+        private bool ExerciseExistsInAssignment(int id) => _context.Assignments.Any(a => a.Id == id);
 
-        private bool ExerciseExists(int id) => _context.Exercises.Any(e => e.ExerciseId == id);
+        private bool ExerciseExists(int id) => _context.Exercises.Any(e => e.Id == id);
     }
 }
