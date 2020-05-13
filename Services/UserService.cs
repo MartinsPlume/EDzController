@@ -4,7 +4,6 @@ using EDzController.Domain.Repositories;
 using EDzController.Domain.Security.Hashing;
 using EDzController.Domain.Services;
 using EDzController.Domain.Services.Communication;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace EDzController.Services

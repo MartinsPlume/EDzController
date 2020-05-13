@@ -8,20 +8,12 @@ namespace EDzController.Domain.Models
         [Key]
         public int Id { get; set; }
         
-        [Required]
-        [Column(TypeName = "nvarchar(100)")]
-        public int UserId { get; set; } 
+        public User User { get; set; } 
         
-        [Required]
-        [Column(TypeName = "nvarchar(100)")]
-        public string UserEmail { get; set; }
-        
-        [Required]
         [Column(TypeName = "nvarchar(100)")]
         public string ShortInstruction { get; set; }
 
-        [Required]
         [Column(TypeName = "nvarchar(100)")]
-        public int ExerciseId { get; set; }
+        public Exercise Exercise { get; set; }
     }
 }

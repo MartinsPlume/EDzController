@@ -21,6 +21,12 @@ namespace EDzController.Data
         {
             base.OnModelCreating(builder);
             builder.Entity<UserRole>().HasKey(ur => new {ur.UserId, ur.RoleId});
+            builder.Entity<User>()
+                .HasMany(u => u.Assignments)
+                .WithOne(user => user.User);
+            builder.Entity<Exercise>()
+                .HasMany(u => u.Assignments)
+                .WithOne(exercise => exercise.Exercise);
         }
     }
 }

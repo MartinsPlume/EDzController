@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using EDzController.Domain.Models;
 using EDzController.Domain.Services;
 using Microsoft.AspNetCore.Authorization;

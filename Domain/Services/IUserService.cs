@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using EDzController.Domain.Models;
 using EDzController.Domain.Services.Communication;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace EDzController.Domain.Services
