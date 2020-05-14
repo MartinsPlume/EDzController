@@ -62,9 +62,16 @@ namespace EDzController.Controllers.V1.Assignments
         
         [Authorize(Roles = "Teacher")]
         [HttpPost]
-        public async Task <IActionResult> PostAssignment([FromBody] Assignment assignment)
+        public async Task <IActionResult> PostAssignment([FromBody] AssignmentInfo assignmentInfo)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
+            
+            var assignment = new Assignment()
+            {
+                Exercise = await _context.Exercises.FindAsync(assignmentInfo.ExerciseId),
+                User = await _context.Users.FindAsync(assignmentInfo.UserId),
+                ShortInstruction = assignmentInfo.ShortInstruction
+            };
 
             _context.Assignments.Add(assignment);
             await _context.SaveChangesAsync();
