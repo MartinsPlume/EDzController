@@ -98,7 +98,7 @@ namespace EDzController.Controllers.V1.Exercises
 
             if (ExerciseExistsInAssignment(id))
             {
-                return BadRequest(exercise);
+                return Forbid();
             }
 
             _context.Exercises.Remove(exercise);
