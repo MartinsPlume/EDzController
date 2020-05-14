@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EDzController.Domain.Models
 {
@@ -8,12 +7,13 @@ namespace EDzController.Domain.Models
         [Key]
         public int Id { get; set; }
         
-        public User User { get; set; } 
+        [Required]
+        public User User { get; set; }
         
-        [Column(TypeName = "nvarchar(100)")]
+        [Required]
         public string ShortInstruction { get; set; }
-
-        [Column(TypeName = "nvarchar(100)")]
+        
+        [Required]
         public Exercise Exercise { get; set; }
     }
 }
