@@ -1,4 +1,5 @@
-﻿using EDzController.Data;
+﻿using System;
+using EDzController.Data;
 using EDzController.Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -55,6 +56,8 @@ namespace EDzController.Controllers.V1.Exercises
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
+            if (!string.IsNullOrEmpty(exercise.InstructionVideo) && !Uri.IsWellFormedUriString(exercise.InstructionVideo, UriKind.Absolute)) return Forbid();
+
             _context.Exercises.Add(exercise);
             await _context.SaveChangesAsync();
 
@@ -69,6 +72,10 @@ namespace EDzController.Controllers.V1.Exercises
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
             if (id != exercise.Id) return BadRequest();
+            
+            if (!string.IsNullOrEmpty(exercise.InstructionVideo) 
+                && !Uri.IsWellFormedUriString(exercise.InstructionVideo, UriKind.Absolute)) 
+                return Forbid();
 
             _context.Entry(exercise).State = EntityState.Modified;
 
@@ -96,17 +103,14 @@ namespace EDzController.Controllers.V1.Exercises
             var exercise = await _context.Exercises.FindAsync(id);
             if (exercise == null) return NotFound();
 
-            if (ExerciseExistsInAssignment(id))
-            {
-                return Forbid();
-            }
-
+            if (ExerciseExistsInAssignment(id)) return Forbid();
+            
             _context.Exercises.Remove(exercise);
             await _context.SaveChangesAsync();
             return Ok(exercise);
         }
 
-        private bool ExerciseExistsInAssignment(int id) => _context.Assignments.Any(a => a.Id == id);
+        private bool ExerciseExistsInAssignment(int id) => _context.Assignments.Any(a => a.Exercise.Id == id);
 
         private bool ExerciseExists(int id) => _context.Exercises.Any(e => e.Id == id);
     }

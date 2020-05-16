@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EDzController.Domain.Models
 {
@@ -17,6 +17,10 @@ namespace EDzController.Domain.Models
 
         [Required]
         public string Description { get; set; }
+
+        public bool HasVideo { get; set; }
+                
+        public string InstructionVideo { get; set; }
         
         public ICollection<Assignment> Assignments { get; set; }
     }
