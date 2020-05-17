@@ -56,7 +56,8 @@ namespace EDzController.Controllers.V1.Exercises
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            if (!string.IsNullOrEmpty(exercise.InstructionVideo) && !Uri.IsWellFormedUriString(exercise.InstructionVideo, UriKind.Absolute)) return Forbid();
+            if (exercise.HasVideo 
+                && !Uri.IsWellFormedUriString(exercise.InstructionVideo, UriKind.Absolute)) return Forbid();
 
             _context.Exercises.Add(exercise);
             await _context.SaveChangesAsync();
@@ -73,9 +74,8 @@ namespace EDzController.Controllers.V1.Exercises
 
             if (id != exercise.Id) return BadRequest();
             
-            if (!string.IsNullOrEmpty(exercise.InstructionVideo) 
-                && !Uri.IsWellFormedUriString(exercise.InstructionVideo, UriKind.Absolute)) 
-                return Forbid();
+            if (exercise.HasVideo 
+                && !Uri.IsWellFormedUriString(exercise.InstructionVideo, UriKind.Absolute)) return Forbid();
 
             _context.Entry(exercise).State = EntityState.Modified;
 
