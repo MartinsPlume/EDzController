@@ -31,7 +31,9 @@ namespace EDzController.Controllers.V1.Exercises
             if (userRole != null && userRole.Equals("Teacher")) return _context.Exercises;
             
             var userEmail = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var exercises = _context.Assignments.Where(u => u.User.Email == userEmail).Select(u => u.Exercise.Id);
+            var exercises = _context.Assignments
+                .Where(u => u.User.Email == userEmail)
+                .Select(u => u.Exercise.Id);
             
             return _context.Exercises.Where(e=>exercises.Contains(e.Id));
         }
