@@ -21,7 +21,6 @@ namespace EDzController
             }
 
             host.Run();
-
         }
 
         private static IHostBuilder CreateHostBuilder(string[] args) =>

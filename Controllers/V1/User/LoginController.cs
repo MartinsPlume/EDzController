@@ -38,8 +38,7 @@ namespace EDzController.Controllers.V1.User
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            var response =
-                await _loginService.RefreshTokenAsync(refreshTokenResource.Token, refreshTokenResource.UserEmail);
+            var response = await _loginService.RefreshTokenAsync(refreshTokenResource.Token, refreshTokenResource.UserEmail);
             if (!response.Success) return BadRequest(response.Message);
 
             var tokenResource = _mapper.Map<AccessToken, AccessTokenResource>(response.Token);

@@ -1,9 +1,9 @@
-﻿using System;
-using EDzController.Data;
+﻿using EDzController.Data;
 using EDzController.Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -27,15 +27,15 @@ namespace EDzController.Controllers.V1.Exercises
                 .Claims
                 .FirstOrDefault(c => c.Type == "UserRole")?
                 .Value.ToString();
-            
+
             if (userRole != null && userRole.Equals("Teacher")) return _context.Exercises;
-            
+
             var userEmail = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
             var exercises = _context.Assignments
                 .Where(u => u.User.Email == userEmail)
                 .Select(u => u.Exercise.Id);
-            
-            return _context.Exercises.Where(e=>exercises.Contains(e.Id));
+
+            return _context.Exercises.Where(e => exercises.Contains(e.Id));
         }
 
         [Authorize(Roles = "Teacher, Student")]
@@ -58,7 +58,7 @@ namespace EDzController.Controllers.V1.Exercises
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            if (exercise.HasVideo 
+            if (exercise.HasVideo
                 && !Uri.IsWellFormedUriString(exercise.InstructionVideo, UriKind.Absolute)) return Forbid();
 
             _context.Exercises.Add(exercise);
@@ -75,8 +75,8 @@ namespace EDzController.Controllers.V1.Exercises
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
             if (id != exercise.Id) return BadRequest();
-            
-            if (exercise.HasVideo 
+
+            if (exercise.HasVideo
                 && !Uri.IsWellFormedUriString(exercise.InstructionVideo, UriKind.Absolute)) return Forbid();
 
             _context.Entry(exercise).State = EntityState.Modified;
@@ -106,7 +106,7 @@ namespace EDzController.Controllers.V1.Exercises
             if (exercise == null) return NotFound();
 
             if (ExerciseExistsInAssignment(id)) return Forbid();
-            
+
             _context.Exercises.Remove(exercise);
             await _context.SaveChangesAsync();
             return Ok(exercise);
